@@ -7,7 +7,6 @@ tags:
   - Animation
 ---
 
-
 Eğer Raact Native'de animasyon işleriyle uğraştıysanız, animasyonu çalıştırırken `useNativeDriver` parametresini görmüşsünüzdür. Bu paramereyi ilk gördüğümde düşündüğüm şey, "Sanırım animasyon native kısımda çalışacak" oldu. Evet gerçekten de `useNativeDriver` animasyonu native tarafda çalıştırıyor. Peki bunu _nasıl_ yapıyor?
 
 Her şeyden önce bir şeyi açıklığa kavuşturalım. React Native, bütün ekranları native olarak oluşturur yani animasyonların da native olarak oluşturulması gerekir. Javascript bir kutunun yerinin değiştirirken değişikliği haber vermek için bir şekilde işletim sistemi ile haberleşmesi gerekir. Javascript ile Native kod farklı threadlarda çalıştığı için (UI Thread) değişikliğin React Native'in sağladığı "**bridge**" ile işletim sistemine aktarılması gerekir.
@@ -69,7 +68,11 @@ const App = () => {
 export default App;
 ```
 
-![1.gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1619219477279/PsBEiryLg.gif)
+<img
+  src="https://cdn.hashnode.com/res/hashnode/image/upload/v1619219477279/PsBEiryLg.gif"
+  alt="1gif"
+  style="max-width: 100%"
+/>
 
 Evet JS güzel bir şekilde animasyonu çalıştırıyor. Biraz daha zorlayalım
 
@@ -89,7 +92,11 @@ const startAnimation = () => {
   }, 10)
 ```
 
-![2.gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1619219861014/vcTpjybne.gif)
+<img
+  src="https://cdn.hashnode.com/res/hashnode/image/upload/v1619219861014/vcTpjybne.gif"
+  alt="2gif"
+  style="max-width: 100%"
+/>
 
 Görüldüğü üzere JS threadinda FPS düştü ve animasyon* akıcılığını kaybetti.* Bunun nedeni daha önce dediğimiz gibi `scale` değerinin diğer kodlarla birlikte JS threadinda çalışması ve diğer kodları beklemesi.
 
@@ -120,7 +127,11 @@ Animated.timing(scale, {
 }).start();
 ```
 
-![3.gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1619220922554/yry4wjtIP.gif)
+<img
+  src="(https://cdn.hashnode.com/res/hashnode/image/upload/v1619220922554/yry4wjtIP.gif"
+  alt="3gif"
+  style="max-width: 100%"
+/>
 
 Peki bu nasıl oluyor? Kabaca şöyle;
 
