@@ -10,9 +10,9 @@ module.exports = {
     // See all options: https://github.com/LekoArts/gatsby-themes/blob/master/themes/gatsby-theme-minimal-blog/gatsby-config.js
     siteTitle: `Faruk's Tech Blog`,
     siteTitleAlt: `Faruk's Tech Blog`,
-    siteHeadline: `A tech blog generally about Frontend and Javascirpt`,
+    siteHeadline: `A tech blog generally about Frontend and Javascript`,
     siteUrl: `https://faruko.space/`,
-    siteDescription: `A tech blog generally about Frontend and Javascirpt`,
+    siteDescription: `A tech blog generally about Frontend and Javascript`,
     siteLanguage: `tr`,
     siteImage: `/banner.jpg`,
     author: `@bufgix_`,
@@ -73,7 +73,7 @@ module.exports = {
       options: {
         name: `Faruk' Tech Blog`,
         short_name: `faruk-blog`,
-        description: `A tech blog generally about Frontend and Javascirpt`,
+        description: `A tech blog generally about Frontend and Javascript`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#6B46C1`,
