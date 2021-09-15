@@ -31,6 +31,10 @@ module.exports = {
             title: `About`,
             slug: `/about`,
           },
+          {
+            title: `Bookmarks`,
+            slug: `/bookmarks`,
+          },
         ],
         externalLinks: [
           {
