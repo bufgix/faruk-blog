@@ -1,4 +1,4 @@
-name: README build
+name: Fetch Bookmarks
 
 on:
   push:
