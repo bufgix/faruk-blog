@@ -14,7 +14,6 @@ module.exports = {
     siteUrl: `https://faruko.space/`,
     siteDescription: `A tech blog generally about Frontend and Javascript`,
     siteLanguage: `tr`,
-    siteImage: `/banner.jpg`,
     author: `@bufgix_`,
   },
   plugins: [
