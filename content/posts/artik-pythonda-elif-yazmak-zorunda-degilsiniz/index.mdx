@@ -88,7 +88,7 @@ işimiz çok daha kolay.
 Python dilin syntaxını belirtmek için `Grammar/python.gram` dosyasını kullanıyor. Dil ile ilgili bir yazımı değiştirmek istediğimizde
 bu dosyayı değiştirmek gerekiyor.
 
-Dokümantasyona bakmadan ilk alımda gelen IDE de `elif` keywordunu bulup bunu değiştirmekti. 354. satırın oraları şöyle değiştirdim.
+Dokümantasyona bakmadan ilk aklıma gelen IDE de `elif` keywordunu bulup bunu `elseif` değiştirmekti. 354. satırın oraları şöyle değiştirdim.
 
 ```gram {8-10}
 if_stmt[stmt_ty]:
@@ -192,7 +192,7 @@ make: *** [Python/frozen_modules/genericpath.h] Error 1
 
 ```
 
-200 IQ haraket . `elif` i değitik ama Python internal modullerinde hala `elif` kullanıyor. Dolayısıyla parser hata çıkartıyor.
+200 IQ haraket . `elif` i değiştik ama Python internal modullerinde hala `elif` kullanıyor. Dolayısıyla parser hata çıkartıyor.
 
 Bunun çözmek için `elif` keywordunu tamamen değişmek yerine `elseif` i de kullanılabilir yapmak gerekiyor. Dokümantasyonda biraz gezindikten sonra
 `|` operatoru ile bunu yapabileceğimi anlıyorum. Aynı yerlerdeki `'elseif'` stringlerini `('elif' | 'elseif')` bununla değiştiriyorum. `make regen-pegen`
