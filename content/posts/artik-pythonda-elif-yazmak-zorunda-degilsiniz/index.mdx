@@ -192,7 +192,7 @@ make: *** [Python/frozen_modules/genericpath.h] Error 1
 
 ```
 
-200 IQ haraket . `elif` i değiştik ama Python internal modullerinde hala `elif` kullanıyor. Dolayısıyla parser hata çıkartıyor.
+200 IQ hareket . `elif` i değiştik ama Python internal modullerinde hala `elif` kullanıyor. Dolayısıyla parser hata çıkartıyor.
 
 Bunun çözmek için `elif` keywordunu tamamen değişmek yerine `elseif` i de kullanılabilir yapmak gerekiyor. Dokümantasyonda biraz gezindikten sonra
 `|` operatoru ile bunu yapabileceğimi anlıyorum. Aynı yerlerdeki `'elseif'` stringlerini `('elif' | 'elseif')` bununla değiştiriyorum. `make regen-pegen`
