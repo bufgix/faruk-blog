@@ -12,12 +12,6 @@ ile baya bi' uygulama geliştirdim. Bu süreçte öğrendiğim bazı şeyleri pa
 Burada anlatacağım her şey belki en doğru yöntem değil fakat React Native projelerimi
 bu şekilde oluşturuyorum ve şimdiye kadar sorun yaşamadım.
 
-Öncelikle şunu söyleyebilirim sıfırdan bir uygulama geliştirip
-marketlerde yayına almak sandığımdan çok daha zormuş. İlk uygulamayı yazmaya
-başlarken sadece kod yazarım sonrasında hemen markete atıp kullanıcı toplarım
-gibi düşündüm. Tabii ki olay öyle değilmiş. Bu başka bir yazının konusu
-ama birkaç başarısız denemden sonra kendime uygun bir proje yapısı oluşturbildim.
-
 Bu yazıda gelir getirmesi istenen bir uygulamanın
 _uygulama-içi-satın-alma_, _abonelik_, _metadata_, _build aşamaları_, _markete vermeden update etme_ gibi
 konuları ele alacağım. Bunun yanında React tarafında
@@ -26,7 +20,7 @@ _store yapısı, hookların efektif kullanımı, API dizaynı_ gibi başlıklard
 ## Projeyi Oluşturmak
 
 Bir React Native uygulaması oluşturmanın birden fazla yolu var. Bunlardan biri
-[Expo]() kullanmak. Expo kullanmak yeni başlayan bir için oldukça kolay bir yol olabilir.
+[Expo]() kullanmak. Expo kullanmak yeni başlayan biri için oldukça kolay bir yol olabilir.
 Fakat kişisel olarak ben artık tercih etmiyorum nedenleri ise:
 
 - Uygulamanın boyutunu fazla **büyütmesi** (Bir QR kod okuyucu yapmıştım ve production
@@ -34,13 +28,14 @@ Fakat kişisel olarak ben artık tercih etmiyorum nedenleri ise:
 - Bazı native modulleri Expo üzerinden **kullanamamak**.
 
 Bunlar dışında çok da yok aslında ama normal React Native kurulumuyla başlamak bana
-daha fazla kontrol sağlıyor.
+daha fazla kontrol sağlıyor. (Expo kullanıp memnun olanlar da var tabi. [Buradan](https://twitter.com/enesozt_/status/1474039877893296140)
+okuyabilirsiniz. Anlaşılan Expo'nun yeni sürümleri yukarda bahsettiğim sorunları çözüyor. Yakında yeniden denerim kendisini.)
 
 #### Typescript
 
-Evet bu [zımbırtı]() olmadan ben artık uygulama _yazmıyorum_. Ilerde anlatacağım coğu şeyde Typescript
+Evet bu [zımbırtı]() olmadan ben artık uygulama _yazmıyorum_. İlerde anlatacağım çoğu şeyde Typescript
 yardımını kullandığım için Typescriptin olmaması kabul edilemez. Unutmayın amacımız kurşun geçirmeyen,
-gelir getirmesi istenen, sürdürülebilir bir uygulama oluşturmak. Typescript bu konuda baya kolaylik sağlıyor.
+sürdürülebilir bir uygulama oluşturmak. Typescript bu konuda baya kolaylik sağlıyor.
 bu yüzden React Native uygulamasını Typescript ile kurmanızı tavsiye ederim.
 
 ```shell
@@ -120,9 +115,9 @@ src
 Genel olarak böyle bir dizin yapısı kullanıyorum. Kısaca bir özet geceyim, daha sonra daha detaylı inceleyelim.
 
 - `api` burada backend servisi ile haberleşmek için gerekli dosyalar bulunur. `Axios`, `Apollo` gibi kütühanelerin örneklemeleri burada bulunur
-- `assets` burada uygulamada kullancak resimler ve fontlar gibi static dosyalar bulunur
+- `assets` burada uygulamada kullanılacak resimler ve fontlar gibi static dosyalar bulunur
 - `components` burada uygulama bileşenleri bulunur
-  > Tercihen ben bu dizin içinde bir de `index.ts` ekleyip tüm componentleri buradan exportluyorum. Bu bana komponenti
+  > Tercihen ben bu dizin içinde bir de `index.ts` ekleyip tüm componentleri buradan exportluyorum. Bu, komponenti
   > kullanırken daha temiz bir kod sağlıyor
   >
   > ```ts:title=./src/components/index.ts
@@ -137,17 +132,20 @@ Genel olarak böyle bir dizin yapısı kullanıyorum. Kısaca bir özet geceyim,
   > ```ts
   > import { Button } from "@/components";
   > ```
-- `icons` Burada svg tipinde iconlar olacak.
+- `icons` Burada svg tipinde iconlar bulunur.
 - `lang` Burada dil objeleri bulunur
 - `navigation` Burada sayfaların navigasyondaki yollarını belirleyen tanımlamalar bulunur
-- `store` Burada uygulamanın global store dosyaları bulunur
+- `store` Burada uygulamanın store dosyaları bulunur
 - `styles` Burada renkler, fontlar ve margin-padding değerleri bulunur.
 - `typings` Burada uygulamamız için tip tanımlamaları bulunur
 - `utils` Burada hooklar, yardımcı methodlar ve sabit değelerin olduğu dosyalar bulunur
 - `views` Burada uygulamada kullancağımız sayfalar bulunur
 - `bootstrap.tsx` Bu dosya uygulamamızın kök komponenti. Genelde burada uygulama açılmadan önce yüklencek
-  asenkron işlemler(network requestleri, local databaseden inital verilerin çekilmesi vb.) yapılır. Eğer
-  SplashScreen kullancaksınız bütün asenkron işlemleri yaptıktan sonra Splash ekranını kaldırabilirsiniz.
+  asenkron işlemler(network requestleri, local databaseden inital verilerin çekilmesi vb.) yapılır. Provider'ları da
+  bu dosyaya yazarım ve genelde şuna benzer:
+  ![ProvidersHEll](./provider.jpg)
+
+  Eğer SplashScreen kullancaksınız bütün asenkron işlemleri yaptıktan sonra Splash ekranını bu component içinde kaldırabilirsiniz.
 
   Örnek olarak:
 
@@ -228,8 +226,8 @@ import * as Icons from "@/components/icons/";
 ### Boyutlar, Boşluklar
 
 Elinizde bir tasarım varsa tasarımda elemente gelip width, height değerlerini pixel cinsiden olduğu gibi
-React Native'e vermek çok mantıklı değil. Çünkü faklı ekranlarda aynı pixel değeri istediğimiz bir şey
-değildir. Bunu çözmek için kullandığım yöntem ise şöyle:
+React Native'e vermek çok mantıklı değil. Çünkü faklı ekranlarda aynı pixel değeri istediğimiz sonuçları vermeyebilir.
+Bunu çözmek için kullandığım yöntem ise şöyle:
 
 Diyelim ki referans alıdğınız bir tasarım var
 
@@ -343,7 +341,7 @@ export default function Index() {
 
   useEffect(() => {
     setLoading(true);
-    Car.fetch()
+    CarService.fetch()
       .then(cars => {
         setData(cars);
       })
@@ -361,8 +359,8 @@ export default function Index() {
 }
 ```
 
-Görüldüğü gibi her sayfada en az 3 tane state değişkeni sürekli olarak
-tanımlamamız gerekiyor. Bunu daha efektif bir hale getirebiliriz.
+Görüldüğü gibi her sayfada en az 3 tane state değişkeni tanımlamamız gerekiyor. Böyle 10 tane sayfanız oluduğunu düşünürseniz sürkeli
+bu şekilde tanımlamalar yapmak işkence olacaktır. Bunu daha efektif bir hale getirebiliriz.
 
 React tarafında backend servisinden veri çekerken [React Query]() kullanıyorum.
 Basit olarak şöyle
@@ -394,14 +392,14 @@ Caching, Memorizing, Performance Optimization gibi pek çok farklı sorunu çöz
 
 ### Store Yapısı
 
-Ben global state için uygulamarımda [Redux]() ve [Redux-Toolkit]() kullanıyorum. Reduxdan önce state için [Mobx](),
-[Mobx-State-Tree]() gibi kütüphaneler de kullandım. Redux o zamanlar hep bana bir sürü reducer yazdığın
+Ben global state için uygulamarımda [Redux]() ve [Redux-Toolkit]() kullanıyorum. Reduxdan önce [Mobx](),
+[Mobx-State-Tree]() gibi kütüphaneler de kullandım. Redux o zamanlar bana bir sürü reducer yazdığın,
 bir ton _boilerplate_ içeren kod yazmamın gerektiği, kötü bir kütüphane gibi geliyordu. Son zamanlarda
 Redux Toolkit ile birlikte Redux yazmak olukça keyifli hale geldi. Redux Toolkit ile
 daha az ve anlaşılır kod ile state'i yönetebildiğimi görünce artık projelerimde Redux kullanmaya
 başladım.
 
-Store yazarken dikkta ettiğim 2 şey var. Biri store'u typescript ile doğru ayarlamak.
+Store yazarken dikkat ettiğim 2 şey var. Biri store'u typescript ile doğru ayarlamak.
 
 ```ts:title=/store/user.slice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -503,3 +501,6 @@ function Index(){
 }
 
 ```
+
+Burada ilk kısmı sonlandırıyorum. Buraya kadar hep React, React Native üzerinde durdum. İkinci kısımda (_eğer üşenmeden yazarsam_) build süreçleri, versyonlama,
+uygulama içi satın alma ve abonelik gibi konulara gireceğim.
