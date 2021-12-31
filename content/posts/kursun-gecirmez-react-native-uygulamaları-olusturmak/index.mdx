@@ -21,7 +21,7 @@ _store yapısı, hookların efektif kullanımı, API dizaynı_ gibi başlıklard
 ## Projeyi Oluşturmak
 
 Bir React Native uygulaması oluşturmanın birden fazla yolu var. Bunlardan biri
-[Expo]() kullanmak. Expo kullanmak yeni başlayan biri için oldukça kolay bir yol olabilir.
+[Expo](https://expo.dev/) kullanmak. Expo kullanmak yeni başlayan biri için oldukça kolay bir yol olabilir.
 Fakat kişisel olarak ben artık tercih etmiyorum nedenleri ise:
 
 - Uygulamanın boyutunu fazla **büyütmesi** (Bir QR kod okuyucu yapmıştım ve production
@@ -34,7 +34,7 @@ okuyabilirsiniz. Anlaşılan Expo'nun yeni sürümleri yukarda bahsettiğim soru
 
 #### Typescript
 
-Evet bu [zımbırtı]() olmadan ben artık uygulama _yazmıyorum_. İlerde anlatacağım çoğu şeyde Typescript
+Evet bu [zımbırtı](https://www.typescriptlang.org/) olmadan ben artık uygulama _yazmıyorum_. İlerde anlatacağım çoğu şeyde Typescript
 yardımını kullandığım için Typescriptin olmaması kabul edilemez. Unutmayın amacımız kurşun geçirmeyen,
 sürdürülebilir bir uygulama oluşturmak. Typescript bu konuda baya kolaylik sağlıyor.
 bu yüzden React Native uygulamasını Typescript ile kurmanızı tavsiye ederim.
@@ -168,10 +168,10 @@ Genel olarak böyle bir dizin yapısı kullanıyorum. Kısaca bir özet geceyim,
 
 ### Iconlar ve SVG
 
-Yaptığım uygulamaların hiçbirinde tasarımı ben yapmadım elimde her zaman bir [Figma]() dosyası oldu. Figmada
+Yaptığım uygulamaların hiçbirinde tasarımı ben yapmadım elimde her zaman bir [Figma](https://www.figma.com) dosyası oldu. Figmada
 iconları `.svg` olarak export alabildiğimden kolayca React Native içerisinde kullanbiliyordum.
 
-Bunun için kullandığım araç [SVGR](). SVGR nin amacı, svg dosyalarını benim için React componentlerine
+Bunun için kullandığım araç [SVGR](https://react-svgr.com/). SVGR nin amacı, svg dosyalarını benim için React componentlerine
 dönüştürmek.
 
 #### SVGR kurulumu
@@ -363,7 +363,7 @@ export default function Index() {
 Görüldüğü gibi her sayfada en az 3 tane state değişkeni tanımlamamız gerekiyor. Böyle 10 tane sayfanız oluduğunu düşünürseniz sürkeli
 bu şekilde tanımlamalar yapmak işkence olacaktır. Bunu daha efektif bir hale getirebiliriz.
 
-React tarafında backend servisinden veri çekerken [React Query]() kullanıyorum.
+React tarafında backend servisinden veri çekerken [React Query](https://react-query.tanstack.com/) kullanıyorum.
 Basit olarak şöyle
 
 ```tsx:title=/views/Cars/index.tsx {8-10}
@@ -393,8 +393,8 @@ Caching, Memorizing, Performance Optimization gibi pek çok farklı sorunu çöz
 
 ### Store Yapısı
 
-Ben global state için uygulamarımda [Redux]() ve [Redux-Toolkit]() kullanıyorum. Reduxdan önce [Mobx](),
-[Mobx-State-Tree]() gibi kütüphaneler de kullandım. Redux o zamanlar bana bir sürü reducer yazdığın,
+Ben global state için uygulamarımda [Redux](https://redux.js.org/) ve [Redux-Toolkit](https://redux-toolkit.js.org/) kullanıyorum. Reduxdan önce [Mobx](https://mobx.js.org/README.html),
+[Mobx-State-Tree](https://mobx-state-tree.js.org/intro/welcome) gibi kütüphaneler de kullandım. Redux o zamanlar bana bir sürü reducer yazdığın,
 bir ton _boilerplate_ içeren kod yazmamın gerektiği, kötü bir kütüphane gibi geliyordu. Son zamanlarda
 Redux Toolkit ile birlikte Redux yazmak olukça keyifli hale geldi. Redux Toolkit ile
 daha az ve anlaşılır kod ile state'i yönetebildiğimi görünce artık projelerimde Redux kullanmaya
